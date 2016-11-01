@@ -1,0 +1,7 @@
+LOCAL_PATH:=$(call my-dir)
+include $(CLEAR-VARS)
+LOCAL_MODULE := ffmpeg
+LOCAL_MODULE_FILENAME :=libffmpeg
+LOCAL_SRC_FILES := libffmpeg.so
+LOCAL_EXPORT_C_INCLUDES := $(LOCAL_PATH)
+include $(PREBUILT_SHARED_LIBRARY)

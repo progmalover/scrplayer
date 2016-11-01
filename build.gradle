@@ -1,0 +1,46 @@
+apply plugin: 'com.android.application'
+buildscript {
+    repositories {
+        jcenter()
+    }
+
+    dependencies {
+        classpath 'com.android.tools.build:gradle:2.1.2'
+    }
+}
+android {
+    compileSdkVersion 24
+    buildToolsVersion '24.0.0'
+    useLibrary 'org.apache.http.legacy'
+    defaultConfig {
+        applicationId "org.libsdl.app"
+    }
+
+    signingConfigs {
+        config {
+            keyAlias 'oe vdi android webclient & remote desktop(vdi)'
+            keyPassword 'oe1234'
+            storeFile file('/home/uftp/vdi-webclient/docs/webClientKeystore')
+            storePassword 'oe1234'
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+            signingConfig signingConfigs.config
+        }
+    }
+}
+
+android {
+    sourceSets {
+        main {
+            jni.srcDirs = ['main']
+        }
+    }
+}
+
+dependencies {
+}
