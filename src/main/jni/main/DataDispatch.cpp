@@ -75,19 +75,24 @@
         _dispfunc = func;
    }
 
+  //process datas
   void DataDispatch::QDataQueue::Run()
   {
 
         while(true)
         {
+            //waiting for condation occured then starting data processing.
+            //
             std::unique_lock<std::mutex> ulck(metx);
             mcv.wait(ulck);
             {
                 int len = 0;
                 uint8_t *Data = nullptr;
                 int sz = mQ.size();
+              //process all datas in the q
                 while(sz > 0)
                 {
+                   // get data from q in multi-thread safe
                     do{
                     std::lock_guard<std::mutex> lck(mqtx);
                     DATA &data = *mQ.begin();
@@ -111,6 +116,8 @@
 
   }
 
+  //ｉｎｓｅｒｔ data to queque ,this function will be called by another thread　
+  //lock_guard used for mq protection 
   void DataDispatch::QDataQueue::push(uint8_t *Data,int len)
   {
         std::lock_guard<std::mutex> lck(mqtx);
